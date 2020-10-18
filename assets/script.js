@@ -1,6 +1,8 @@
-    var questions = [
-    { text: "What is the first letter of the alphabet?", possibleAnswers: ["A", "B", "C", "D", "E"], answerIndex: 0 },
-    { text: "What is the last letter of the alphabet?", possibleAnswers: ["A", "B", "C", "D", "Z"], answerIndex: 4 },
+    let questions = [
+      { text: "Which of these is not a built-in method?", possibleAnswers: ["toUpperCase()", "length()", "indexOf()", "firstName()"], answerIndex: 3 },
+      { text: "What is the style term in JavaScript for when we capitalize the second word in a phrase?", possibleAnswers: ["uppy downy", "camelCase", "capital case", "method writing"], answerIndex: 1 },
+      { text: "What do we put inside an <a> tag to link to an outside source?", possibleAnswers: ["href:", "separate:", "at:", "remove:"], answerIndex: 0 },
+      { text: "What does the 'P' in 'API' stand for?", possibleAnswers: ["position", "possible", "perpetual", "programming"], answerIndex: 3 },
     ];
 
   document.addEventListener('DOMContentLoaded', setupWorld())
@@ -28,14 +30,14 @@
   }
 
   function displayNextQuestion() {
-    var currentQuestion = questions[state.currentQuestionIndex];
+    let currentQuestion = questions[state.currentQuestionIndex];
 
     questionTextElement.textContent = currentQuestion.text;
 
     answersElement.innerHTML = "";
 
     for (i = 0; i < currentQuestion.possibleAnswers.length; i++) {
-      var possibleAnswerButton = document.createElement("BUTTON");
+      let possibleAnswerButton = document.createElement("BUTTON");
       possibleAnswerButton.textContent = currentQuestion.possibleAnswers[i];
       possibleAnswerButton.setAttribute("data-index", i);
       possibleAnswerButton.onclick = submitAnswer;
@@ -46,9 +48,9 @@
   }
 
   function submitAnswer(event) {
-    var submittedAnswerIndex = event.target.dataset.index;
+    let submittedAnswerIndex = event.target.dataset.index;
 
-    var currentQuestion = questions[state.currentQuestionIndex];
+    let currentQuestion = questions[state.currentQuestionIndex];
 
     if (submittedAnswerIndex == currentQuestion.answerIndex) {
       awardPoints(10);
@@ -71,4 +73,8 @@
     questionElement.setAttribute("hidden", true);
 
     submitScoreElement.removeAttribute("hidden");
+  }
+
+  function submitHighScore() {
+    
   }

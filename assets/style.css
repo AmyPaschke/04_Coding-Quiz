@@ -84,14 +84,22 @@ hr {
     align-items: center;
 }
 
-#start-button {
+#start-button,
+#score-button {
     color: aliceblue;
     background-color: rgb(255, 106, 175);
     border: rgb(255, 106, 175);
     align-items: center;
+    padding: 10px;
+    
 }
 
-#start-button:hover {
+form {
+    padding-bottom: 20px;
+}
+
+#start-button:hover,
+#score-button:hover {
     background-color: rgb(197, 176, 197);
 }
 
