@@ -3,10 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Assets/style.css">
     <title>Coding Quiz</title>
+
 </head>
 <body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <div class="navbar-header">
+
+           <!--name at the top of the page links to nowhere for now -->
+          <a href="#" id="navbar-name">Coding Quiz</a>
+        </div>
+
+        <div class="nav navbar-nav navbar-right" id="countdown" hidden>
+          <span> -enter timer countdown-</span>
+        </div>
+
+      </div>
+  </nav>
+
+<br />
+  
+  <section class="container">
+
+    <div class="row" id="wrapper">
+      <div class="col-md-12">
+        <div id="start-quiz">
+          <h1> Introductory Coding Quiz </h1>
+          <hr>
+          <p>
+            Hello! Please click "Begin Quiz" to start the coding quiz. Each question offers four multiple-choice answers with the option to save your score at the end of the quiz.
+          </p>
+          <div class="center">
+            <button id="start-button" onclick="startQuiz()">Start Quiz</button>
+          </div>
+        </div>
+        <div id="question" hidden>
+          <p></p>
+          <span id="question-text"></span>
+          <div id="answers"></div>
+        </div>
+
     
     <script src="assets/script.js"></script>
 </body>
