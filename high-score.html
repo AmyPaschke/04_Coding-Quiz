@@ -33,29 +33,22 @@
     <div class="row" id="wrapper">
       <div class="col-md-12">
         <div id="start-quiz">
-          <h1> Introductory Coding Quiz </h1>
+          <h2> High Scores </h1>
           <hr>
-          <p>
-            Hello! Please click Start Quiz" to start the coding quiz. Each question offers four multiple-choice answers with the option to save your score at the end of the quiz.
-          </p>
+          <ul>
+          </ul>
+          <form class="center">
+            <input id="item" type="text" placeholder="add initials">
+            <button id="score-button">Submit</button>
+          </form>
           <div class="center">
-            <button id="start-button" onclick="startQuiz()">Start Quiz</button>
+
           </div>
         </div>
-        <div id="question" hidden>
-          <p></p>
-          <span id="question-text"></span>
-          <div id="answers"></div>
-        </div>
-        <div id="submit-score" hidden>
-          <span>Submit your score here:</span>
-          <form>
-            <input id="item" type="text" placeholder="score">
-          </form>
-          <button id="score-button" onclick="submitHighScore()">Submit</button>
-        </div>
         <hr>
-        <p>Total Score: <span id="score">0</span> </p>
+        <div class="center">
+          <button id="score-button">Clear List</button>
+        </div>
 
       </div>   
     <script src="assets/script.js"></script>

@@ -22,7 +22,8 @@ a:hover {
     color: #333333;
 }
 
-h1 {
+h1,
+h2 {
     text-align: center;
     color: rgb(255, 106, 175);
 }
@@ -58,10 +59,6 @@ p {
 
 .main-body {
     overflow-y: auto;
-}
-
-.clearfix {
-    clear: both;
 }
 
 .placeholders {
