@@ -1,3 +1,4 @@
+//questions for quiz
 let questions = [
   { text: "Which of these is not a built-in method?", possibleAnswers: ["toUpperCase()", "length()", "indexOf()", "firstName()"], answerIndex: 3 },
   { text: "What is the style term in JavaScript for when we capitalize the second word in a phrase?", possibleAnswers: ["uppy downy", "camelCase", "capital case", "method writing"], answerIndex: 1 },
@@ -5,30 +6,49 @@ let questions = [
   { text: "What does the 'P' in 'API' stand for?", possibleAnswers: ["position", "possible", "perpetual", "programming"], answerIndex: 3 },
 ];
 
+//page elements
+let scoreElement = document.getElementById("score");
+let startQuizElement = document.getElementById("start-quiz");
+let questionElement = document.getElementById("question")
+let questionTextElement = document.getElementById("question-text")
+let answersElement = document.getElementById("answers");
+let submitScoreElement = document.getElementById("submit-score");
+let timerElement = document.getElementById("countdown");
+let secondsElement = document.getElementById("seconds");
+let correctAnswer = document.getElementById("correct-answer");
+let incorrectAnswer = document.getElementById("incorrect-answer");
+
+//once page loads, load these elements
 document.addEventListener('DOMContentLoaded', setupWorld())
 
+//sets question to none and score to 0
 function setupWorld() {
   state = {
     currentQuestionIndex: 0,
     currentScore: 0,
   }
-
-  scoreElement = document.getElementById("score");
-  startQuizElement = document.getElementById("start-quiz");
-  questionElement = document.getElementById("question")
-  questionTextElement = document.getElementById("question-text")
-  answersElement = document.getElementById("answers");
-  submitScoreElement = document.getElementById("submit-score");
 }
 
+//on button click, quiz begins
 function startQuiz() {
   state.currentQuestionIndex = 0;
 
+  //timerStart();
+
   startQuizElement.setAttribute("hidden", true);
+
+  timerElement.removeAttribute("hidden");
 
   displayNextQuestion();
 }
 
+/*let count = 75, timer = setInterval(function() {
+  $("#seconds").html((count--));
+  if (count == 1)
+  clearTimeout(timer);
+}, 1000); */
+
+//this will scroll through each question
 function displayNextQuestion() {
   let currentQuestion = questions[state.currentQuestionIndex];
 
@@ -37,7 +57,7 @@ function displayNextQuestion() {
   answersElement.innerHTML = "";
 
   for (i = 0; i < currentQuestion.possibleAnswers.length; i++) {
-    let possibleAnswerButton = document.createElement("BUTTON");
+    let possibleAnswerButton = document.createElement("button");
     possibleAnswerButton.textContent = currentQuestion.possibleAnswers[i];
     possibleAnswerButton.setAttribute("data-index", i);
     possibleAnswerButton.onclick = submitAnswer;
@@ -54,6 +74,11 @@ function submitAnswer(event) {
 
   if (submittedAnswerIndex == currentQuestion.answerIndex) {
     awardPoints(10);
+
+    //correctAnswer.removeAttribute("hidden")
+
+  } else {
+    //incorrectAnswer.removeAttribute("hidden");
   }
 
   if (state.currentQuestionIndex >= questions.length - 1) {
@@ -81,10 +106,9 @@ function submitHighScore() {
 
 //variables for the high-score html
 let form = document.querySelector("form");
-let submitButton = document.getElementById("score-button");
+let scoreButton = document.getElementById("score-button");
 let clearButton = document.getElementById("clear-button");
 let ul = document.querySelector("ul");
-let button = document.querySelector("button");
 let input = document.querySelector("item");
 
 //array will be filled with JSON strings/arrays after we parse through local storage
@@ -106,7 +130,7 @@ let liMaker = function(text) {
 }
 
 //this will add the initials (the list items) to the page after the user presses submit
-submitButton.addEventListener("click", function(event) {
+scoreButton.addEventListener("click", function(event) {
   event.preventDefault();
 
   let inputValue = document.getElementById("item").value;
@@ -120,12 +144,10 @@ submitButton.addEventListener("click", function(event) {
   })
 })
 
-//this will remove all locally stored initials
-clearButton.addEventListener("click", function() {
+function clearStorage() {
   localStorage.clear();
-  while (ul.firstChild) { //"while" a "first child" exists under the <ul>... remove child
-    ul.removeChild(ul.firstChild);
-  }
-  itemsArray = [];
-})
+}
+
+//this will remove all locally stored initials
+clearButton.addEventListener("click", clearStorage())
 

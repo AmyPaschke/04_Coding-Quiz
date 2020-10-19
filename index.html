@@ -15,12 +15,14 @@
       <div class="container-fluid">
         <div class="navbar-header">
 
-           <!--name at the top of the page links to nowhere for now -->
+           <!--link goes to this page -->
           <a href="#" id="navbar-name">Coding Quiz</a>
         </div>
 
         <div class="nav navbar-nav navbar-right" id="countdown" hidden>
-          <span> -enter timer countdown-</span>
+          <span class="time">
+            <div>Time left: <span id="seconds">75</span></div>
+          </span>
         </div>
 
       </div>
@@ -48,13 +50,19 @@
           <div id="answers"></div>
         </div>
         <div id="submit-score" hidden>
-          <span>Submit your score here:</span>
+          <span>All done! Add your initials here:</span>
           <form>
-            <input id="item" type="text" placeholder="score">
+            <input id="item" type="text" placeholder="initals">
           </form>
-          <button href="high-score.html" id="score-button">Submit</button>
+          <button id="score-button" onclick="window.location.href = 'high-score.html';">Submit</button>
         </div>
         <hr>
+        <div id="correct-answer" hidden>
+          <p>Correct!</p>
+        </div>
+        <div id="incorrect-answer" hidden>
+          <p>Incorrect!</p>
+        </div>
         <p>Total Score: <span id="score">0</span> </p>
 
       </div>   

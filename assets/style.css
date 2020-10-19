@@ -43,12 +43,6 @@ p {
     color: rgb(197, 176, 197);
 }
 
-/*specific padding within the navbar */
-#contact, 
-#portfolio, 
-#about-me {
-    padding-right: 5px;
-}
 
 /* added specifics for the column */
 .col-md-12 {
@@ -81,14 +75,14 @@ hr {
     align-items: center;
 }
 
-#start-button,
-#score-button,
-#clear-button {
+button, 
+.button-text {
     color: aliceblue;
     background-color: rgb(255, 106, 175);
     border: rgb(255, 106, 175);
     align-items: center;
     padding: 10px;
+    margin-left: 20px;
     
 }
 
@@ -96,9 +90,7 @@ form {
     padding-bottom: 20px;
 }
 
-#start-button:hover,
-#score-button:hover,
-#clear-button:hover {
+button:hover {
     background-color: rgb(197, 176, 197);
 }
 
