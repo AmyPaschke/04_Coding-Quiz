@@ -82,9 +82,21 @@ function submitHighScore() {
 //variables for the high-score html
 let form = document.querySelector("form");
 let submitButton = document.getElementById("score-button");
+let clearButton = document.getElementById("clear-button");
 let ul = document.querySelector("ul");
 let button = document.querySelector("button");
 let input = document.querySelector("item");
+
+//array will be filled with JSON strings/arrays after we parse through local storage
+let itemsArray;
+if (localStorage.getItem("items")) {
+  itemsArray = JSON.parse(localStorage.getItem("items"));
+} else {
+  itemsArray = [];
+} //this part is not working like intended
+
+localStorage.setItem("items", JSON.stringify(itemsArray));
+let data = JSON.parse(localStorage.getItem("items"));
 
 //adds their name to the high score list
 let liMaker = function(text) {
@@ -100,13 +112,20 @@ submitButton.addEventListener("click", function(event) {
   let inputValue = document.getElementById("item").value;
   liMaker(inputValue);
 
-  itemsArray.push(input.value);
+  itemsArray.push(inputValue);
   localStorage.setItem("items", JSON.stringify(itemsArray));
+  
+  data.forEach((item) => {
+    liMaker(item); 
+  })
 })
 
-//array will be filled with JSON strings/arrays after we parse through local storage
-let itemsArray = [];
-
-localStorage.setItem("items", JSON.stringify(itemsArray));
-let data = JSON.parse(localStorage.getItem("items"));
+//this will remove all locally stored initials
+clearButton.addEventListener("click", function() {
+  localStorage.clear();
+  while (ul.firstChild) { //"while" a "first child" exists under the <ul>... remove child
+    ul.removeChild(ul.firstChild);
+  }
+  itemsArray = [];
+})
 

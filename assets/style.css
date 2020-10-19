@@ -82,7 +82,8 @@ hr {
 }
 
 #start-button,
-#score-button {
+#score-button,
+#clear-button {
     color: aliceblue;
     background-color: rgb(255, 106, 175);
     border: rgb(255, 106, 175);
@@ -96,7 +97,8 @@ form {
 }
 
 #start-button:hover,
-#score-button:hover {
+#score-button:hover,
+#clear-button:hover {
     background-color: rgb(197, 176, 197);
 }
 
