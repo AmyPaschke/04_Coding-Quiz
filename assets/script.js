@@ -104,7 +104,7 @@ function endQuiz() {
 let form = document.querySelector("form");
 let scoreButton = document.getElementById("score-button");
 let clearButton = document.getElementById("clear-button");
-let ul = document.querySelector("ul");
+let ul = document.getElementById("ul");
 let input = document.querySelector("item");
 
 //array will be filled with JSON strings/arrays after we parse through local storage
