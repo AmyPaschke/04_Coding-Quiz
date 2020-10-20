@@ -29,24 +29,24 @@ function setupWorld() {
   }
 }
 
+let count = 75;
 //on button click, quiz begins
 function startQuiz() {
   state.currentQuestionIndex = 0;
 
-  //timerStart();
+  let timer = setInterval(function() {
+  count--;
+  document.getElementById("seconds").textContent = count;
+  if (count === 0 || state.currentQuestionIndex === 4) //add to the "if" statement or add in somewhere else?
+  clearInterval(timer);
+  }, 1000);
 
   startQuizElement.setAttribute("hidden", true);
 
   timerElement.removeAttribute("hidden");
 
   displayNextQuestion();
-}
-
-/*let count = 75, timer = setInterval(function() {
-  $("#seconds").html((count--));
-  if (count == 1)
-  clearTimeout(timer);
-}, 1000); */
+} 
 
 //this will scroll through each question
 function displayNextQuestion() {
@@ -100,10 +100,6 @@ function endQuiz() {
   submitScoreElement.removeAttribute("hidden");
 }
 
-function submitHighScore() {
-  
-}
-
 //variables for the high-score html
 let form = document.querySelector("form");
 let scoreButton = document.getElementById("score-button");
@@ -149,5 +145,5 @@ function clearStorage() {
 }
 
 //this will remove all locally stored initials
-clearButton.addEventListener("click", clearStorage())
+//clearButton.addEventListener("click", clearStorage())
 
