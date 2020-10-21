@@ -36,7 +36,7 @@ function startQuiz() {
 
   let timer = setInterval(function() {
   count--;
-  document.getElementById("seconds").textContent = count;
+  secondsElement.textContent = count;
   if (count === 0 || state.currentQuestionIndex === 4) //add to the "if" statement or add in somewhere else?
   clearInterval(timer);
   }, 1000);
@@ -78,6 +78,8 @@ function submitAnswer(event) {
     //correctAnswer.removeAttribute("hidden")
 
   } else {
+
+    removeTime(10);
     //incorrectAnswer.removeAttribute("hidden");
   }
 
@@ -94,6 +96,11 @@ function awardPoints(points) {
   scoreElement.textContent = state.currentScore;
 }
 
+function removeTime(points) {
+  state.currentScore -= points;
+  scoreElement.textContent = state.currentScore;
+}
+
 function endQuiz() {
   questionElement.setAttribute("hidden", true);
 
@@ -105,7 +112,7 @@ let form = document.querySelector("form");
 let scoreButton = document.getElementById("score-button");
 let clearButton = document.getElementById("clear-button");
 let ul = document.getElementById("ul");
-let input = document.querySelector("item");
+let input = document.getElementById("item");
 
 //array will be filled with JSON strings/arrays after we parse through local storage
 let itemsArray;
@@ -129,11 +136,10 @@ let liMaker = function(text) {
 scoreButton.addEventListener("click", function(event) {
   event.preventDefault();
 
-  let inputValue = document.getElementById("item").value;
-  liMaker(inputValue);
-
-  itemsArray.push(inputValue);
+  itemsArray.push(input.value);
   localStorage.setItem("items", JSON.stringify(itemsArray));
+
+  liMaker(input.value);
   
   data.forEach((item) => {
     liMaker(item); 
