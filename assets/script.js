@@ -79,7 +79,7 @@ function submitAnswer(event) {
 
   } else {
 
-    removeTime(10);
+    count -= 15;
     //incorrectAnswer.removeAttribute("hidden");
   }
 
@@ -93,11 +93,6 @@ function submitAnswer(event) {
 
 function awardPoints(points) {
   state.currentScore += points;
-  scoreElement.textContent = state.currentScore;
-}
-
-function removeTime(points) {
-  state.currentScore -= points;
   scoreElement.textContent = state.currentScore;
 }
 
