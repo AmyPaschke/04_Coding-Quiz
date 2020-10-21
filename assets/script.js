@@ -18,26 +18,20 @@ let secondsElement = document.getElementById("seconds");
 let correctAnswer = document.getElementById("correct-answer");
 let incorrectAnswer = document.getElementById("incorrect-answer");
 
-//once page loads, load these elements
-document.addEventListener('DOMContentLoaded', setupWorld())
-
 //sets question to none and score to 0
-function setupWorld() {
-  state = {
-    currentQuestionIndex: 0,
-    currentScore: 0,
-  }
-}
+let currentQuestionIndex = 0;
+let currentScore = 0;
 
+//the starting amount of seconds
 let count = 75;
 //on button click, quiz begins
 function startQuiz() {
-  state.currentQuestionIndex = 0;
+  currentQuestionIndex = 0;
 
   let timer = setInterval(function() {
   count--;
   secondsElement.textContent = count;
-  if (count === 0 || state.currentQuestionIndex === 4) //add to the "if" statement or add in somewhere else?
+  if (count === 0 || currentQuestionIndex === 4) //add to the "if" statement or add in somewhere else?
   clearInterval(timer);
   }, 1000);
 
@@ -50,7 +44,7 @@ function startQuiz() {
 
 //this will scroll through each question
 function displayNextQuestion() {
-  let currentQuestion = questions[state.currentQuestionIndex];
+  let currentQuestion = questions[currentQuestionIndex];
 
   questionTextElement.textContent = currentQuestion.text;
 
@@ -70,7 +64,7 @@ function displayNextQuestion() {
 function submitAnswer(event) {
   let submittedAnswerIndex = event.target.dataset.index;
 
-  let currentQuestion = questions[state.currentQuestionIndex];
+  let currentQuestion = questions[currentQuestionIndex];
 
   if (submittedAnswerIndex == currentQuestion.answerIndex) {
     awardPoints(10);
@@ -83,17 +77,17 @@ function submitAnswer(event) {
     //incorrectAnswer.removeAttribute("hidden");
   }
 
-  if (state.currentQuestionIndex >= questions.length - 1) {
+  if (currentQuestionIndex >= questions.length - 1) {
     endQuiz();
   } else {
-    state.currentQuestionIndex += 1;
+    currentQuestionIndex += 1;
     displayNextQuestion();
   }
 }
 
 function awardPoints(points) {
-  state.currentScore += points;
-  scoreElement.textContent = state.currentScore;
+  currentScore += points;
+  scoreElement.textContent = currentScore;
 }
 
 function endQuiz() {
@@ -103,14 +97,35 @@ function endQuiz() {
 }
 
 //variables for the high-score html
-let form = document.querySelector("form");
 let scoreButton = document.getElementById("score-button");
 let clearButton = document.getElementById("clear-button");
-let ul = document.getElementById("ul");
-let input = document.getElementById("item");
+let ol = document.getElementById("ol");
+let msgDiv = document.getElementById("msg");
+let input = document.getElementById("input");
+
+function displayMessage(type, message) {
+  msgDiv.textContent = message;
+  msgDiv.setAttribute("class", type);
+}
+
+scoreButton.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  let initials = document.getElementById("input").value;
+  
+  if (initials === "") {
+    displayMessage("error", "Initials field cannot be blank.");
+  } else {
+    displayMessage("success", "Added initials + score to high scores list.");
+
+    localStorage.setItem("input", initials);
+    localStorage.setItem("score", currentScore);
+  }
+})
+
 
 //array will be filled with JSON strings/arrays after we parse through local storage
-let itemsArray;
+/* let itemsArray;
 if (localStorage.getItem("items")) {
   itemsArray = JSON.parse(localStorage.getItem("items"));
 } else {
@@ -146,5 +161,5 @@ function clearStorage() {
 }
 
 //this will remove all locally stored initials
-//clearButton.addEventListener("click", clearStorage())
+//clearButton.addEventListener("click", clearStorage()) */
 
