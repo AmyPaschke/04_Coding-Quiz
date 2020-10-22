@@ -25,7 +25,9 @@ let currentScore = 0;
 //the starting amount of seconds
 let count = 75;
 
+//empty variable for adding our time
 let timer;
+
 //on button click, quiz begins
 function startQuiz() {
   currentQuestionIndex = 0;
@@ -116,7 +118,7 @@ function displayMessage(type, message) {
   msgDiv.setAttribute("class", type);
 }
 
-let highScoresArray = [JSON.parse(localStorage.getItem("high-scores"));]
+let highScoresArray = [JSON.parse(localStorage.getItem("high-scores"))];
 
 scoreButton.addEventListener("click", function(event) {
   event.preventDefault();
@@ -131,52 +133,12 @@ scoreButton.addEventListener("click", function(event) {
 
     let currentHighScore = {
       initials: initials, 
-      currentScore: currentScore,
-    }
+      currentScore: currentScore
+    };
 
     highScoresArray.push(currentHighScore);
 
     localStorage.setItem("high-scores", JSON.stringify(highScoresArray));
   }
 })
-
-
-//array will be filled with JSON strings/arrays after we parse through local storage
-/* let itemsArray;
-if (localStorage.getItem("items")) {
-  itemsArray = JSON.parse(localStorage.getItem("items"));
-} else {
-  itemsArray = [];
-} //this part is not working like intended
-
-localStorage.setItem("items", JSON.stringify(itemsArray));
-let data = JSON.parse(localStorage.getItem("items"));
-
-//adds their name to the high score list
-let liMaker = function(text) {
-  let li = document.createElement("li");
-  li.textContent = text;
-  ul.appendChild(li);
-}
-
-//this will add the initials (the list items) to the page after the user presses submit
-scoreButton.addEventListener("click", function(event) {
-  event.preventDefault();
-
-  itemsArray.push(input.value);
-  localStorage.setItem("items", JSON.stringify(itemsArray));
-
-  liMaker(input.value);
-  
-  data.forEach((item) => {
-    liMaker(item); 
-  })
-})
-
-function clearStorage() {
-  localStorage.clear();
-}
-
-//this will remove all locally stored initials
-//clearButton.addEventListener("click", clearStorage()) */
 

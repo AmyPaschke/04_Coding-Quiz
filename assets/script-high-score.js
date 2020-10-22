@@ -20,7 +20,7 @@ renderHighScore();
 function renderHighScore() {
     let highScores = JSON.parse(localStorage.getItem("high-scores"));
 
-    highScores.sort(function(a,b) {
+    highScores.sort(function(a, b) {
       return b.currentScore - a.currentScore;
     });
 
