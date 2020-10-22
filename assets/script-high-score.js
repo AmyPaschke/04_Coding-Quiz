@@ -18,15 +18,18 @@ clearButton.addEventListener("click", clearStorage);
 renderHighScore();
 
 function renderHighScore() {
-    let initials = localStorage.getItem("input");
-    let score = localStorage.getItem("score");
-  
-    if (!initials || !score) {
-      return;
+    let highScores = JSON.parse(localStorage.getItem("high-scores"));
+
+    highScores.sort(function(a,b) {
+      return b.currentScore - a.currentScore;
+    });
+
+    for (let i = 0; i < highScores.length; i++) {
+      let createLi = document.createElement("li");
+      createLi.textContent = `Initials: ${highScores[i].initials}, Score: ${highScores[i].currentScore}`
+      ol.appendChild(createLi);
     }
-  
-    userInitials.textContent = initials;
-    userScore.textContent = score;
+
   }
 
 

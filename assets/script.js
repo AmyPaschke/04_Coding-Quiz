@@ -24,15 +24,17 @@ let currentScore = 0;
 
 //the starting amount of seconds
 let count = 75;
+
+let timer;
 //on button click, quiz begins
 function startQuiz() {
   currentQuestionIndex = 0;
 
-  let timer = setInterval(function() {
+  timer = setInterval(function() {
   count--;
   secondsElement.textContent = count;
-  if (count === 0 || currentQuestionIndex === 4) //add to the "if" statement or add in somewhere else?
-  clearInterval(timer);
+  if (count <= 0 || currentQuestionIndex === 4) //add to the "if" statement or add in somewhere else?
+    endQuiz();
   }, 1000);
 
   startQuizElement.setAttribute("hidden", true);
@@ -94,6 +96,12 @@ function endQuiz() {
   questionElement.setAttribute("hidden", true);
 
   submitScoreElement.removeAttribute("hidden");
+
+  clearInterval(timer);
+
+  count = 0;
+
+  secondsElement.textContent = count;
 }
 
 //variables for the high-score html
@@ -108,18 +116,27 @@ function displayMessage(type, message) {
   msgDiv.setAttribute("class", type);
 }
 
+let highScoresArray = JSON.parse(localStorage.getItem("high-scores"));
+
 scoreButton.addEventListener("click", function(event) {
   event.preventDefault();
 
   let initials = document.getElementById("input").value;
-  
+
   if (initials === "") {
     displayMessage("error", "Initials field cannot be blank.");
+    return;
   } else {
     displayMessage("success", "Added initials + score to high scores list.");
 
-    localStorage.setItem("input", initials);
-    localStorage.setItem("score", currentScore);
+    let currentHighScore = {
+      initials: initials, 
+      currentScore: currentScore,
+    }
+
+    highScoresArray.push(currentHighScore);
+
+    localStorage.setItem("high-scores", JSON.stringify(highScoresArray));
   }
 })
 
