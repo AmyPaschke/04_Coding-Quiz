@@ -118,7 +118,7 @@ function displayMessage(type, message) {
   msgDiv.setAttribute("class", type);
 }
 
-let highScoresArray = [JSON.parse(localStorage.getItem("high-scores"))];
+let highScoresArray = JSON.parse(localStorage.getItem("high-scores")) || [];
 
 scoreButton.addEventListener("click", function(event) {
   event.preventDefault();
