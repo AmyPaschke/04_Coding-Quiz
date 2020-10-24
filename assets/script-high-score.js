@@ -18,6 +18,7 @@ clearButton.addEventListener("click", clearStorage);
 
 renderHighScore();
 
+//this pulls the initials and score from local storage
 function renderHighScore() {
     let highScores = JSON.parse(localStorage.getItem("high-scores"));
 
