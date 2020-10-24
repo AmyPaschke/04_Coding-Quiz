@@ -10,6 +10,7 @@ let userScore = document.getElementById("user-score");
 function clearStorage(event) {
     event.preventDefault();
     localStorage.clear();
+    window.location.reload();
 }
 
 //on click, this will remove all locally stored initials
@@ -20,6 +21,7 @@ renderHighScore();
 function renderHighScore() {
     let highScores = JSON.parse(localStorage.getItem("high-scores"));
 
+    //this will sort the scores in numerical order
     highScores.sort(function(a, b) {
       return b.currentScore - a.currentScore;
     });
