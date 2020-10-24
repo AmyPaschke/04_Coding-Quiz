@@ -54,7 +54,7 @@ function displayNextQuestion() {
 
   answersElement.innerHTML = "";
 
-  for (i = 0; i < currentQuestion.possibleAnswers.length; i++) {
+  for (let i = 0; i < currentQuestion.possibleAnswers.length; i++) {
     let possibleAnswerButton = document.createElement("button");
     possibleAnswerButton.textContent = currentQuestion.possibleAnswers[i];
     possibleAnswerButton.setAttribute("data-index", i);
@@ -65,6 +65,7 @@ function displayNextQuestion() {
   questionElement.removeAttribute("hidden");
 }
 
+//when someone clicks their answer, this function either adds points or removes time from their count
 function submitAnswer(event) {
   let submittedAnswerIndex = event.target.dataset.index;
 
@@ -73,14 +74,12 @@ function submitAnswer(event) {
   if (submittedAnswerIndex == currentQuestion.answerIndex) {
     awardPoints(10);
 
-    //correctAnswer.removeAttribute("hidden")
-
   } else {
 
     count -= 15;
-    //incorrectAnswer.removeAttribute("hidden");
   }
 
+  //once the questions end, the quiz starts the endquiz function, or displays the next question
   if (currentQuestionIndex >= questions.length - 1) {
     endQuiz();
   } else {
@@ -89,11 +88,13 @@ function submitAnswer(event) {
   }
 }
 
+//function to change the total score on the page, and update the points
 function awardPoints(points) {
   currentScore += points;
   scoreElement.textContent = currentScore;
 }
 
+//function for once the quiz ends that removes the questions from the pages and clears timer and count
 function endQuiz() {
   questionElement.setAttribute("hidden", true);
 
@@ -113,13 +114,16 @@ let ol = document.getElementById("ol");
 let msgDiv = document.getElementById("msg");
 let input = document.getElementById("input");
 
+//function to tie in with alert given to the user if their fields are empty
 function displayMessage(type, message) {
   msgDiv.textContent = message;
   msgDiv.setAttribute("class", type);
 }
 
+//array for local storage
 let highScoresArray = JSON.parse(localStorage.getItem("high-scores")) || [];
 
+//on click event for the score button ie when they click the button to add their initials
 scoreButton.addEventListener("click", function(event) {
   event.preventDefault();
 
