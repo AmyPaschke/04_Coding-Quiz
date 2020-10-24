@@ -17,6 +17,7 @@ let timerElement = document.getElementById("countdown");
 let secondsElement = document.getElementById("seconds");
 let correctAnswer = document.getElementById("correct-answer");
 let incorrectAnswer = document.getElementById("incorrect-answer");
+let feedbackDiv = document.getElementById("feedback");
 
 //sets question to none and score to 0
 let currentQuestionIndex = 0;
@@ -65,6 +66,12 @@ function displayNextQuestion() {
   questionElement.removeAttribute("hidden");
 }
 
+//function to popup right/wrong
+/*function feedback(type, message) {
+  feedbackDiv.textContent = message;
+  feedbackDiv.setAttribute("class", type);
+} */
+
 //when someone clicks their answer, this function either adds points or removes time from their count
 function submitAnswer(event) {
   let submittedAnswerIndex = event.target.dataset.index;
@@ -72,10 +79,11 @@ function submitAnswer(event) {
   let currentQuestion = questions[currentQuestionIndex];
 
   if (submittedAnswerIndex == currentQuestion.answerIndex) {
+    //feedback("success", "Correct answer!");
     awardPoints(10);
 
   } else {
-
+    //feedback("error", "Incorrect answer.");
     count -= 15;
   }
 
